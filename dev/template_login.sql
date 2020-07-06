@@ -38,7 +38,7 @@ CREATE TABLE `template_usr`  (
 -- ----------------------------
 -- Records of template_usr
 -- ----------------------------
-INSERT INTO `template_usr` VALUES (1, 'Admin', 'Template', 'admin@template.com', 'images/usr/avatar.png', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', 'fd38f01eec84a468ab33e0e5089d4ac3', 0, 1, 0);
+INSERT INTO `template_usr` VALUES (1, 'Admin', 'Template', 'admin@template.com', 'images/usr/avatar.png', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '', 0, 1, 0);
 INSERT INTO `template_usr` VALUES (2, 'User1', 'Template', 'user@template.com', 'images/usr/avatar.png', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', NULL, 0, 1, 0);
 INSERT INTO `template_usr` VALUES (3, 'User2 ', 'Template', 'user2@template.com', 'images/usr/avatar.png', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', NULL, 0, 2, 0);
 
