@@ -1,7 +1,14 @@
 <?php
 unset($_COOKIE['reloginID']);
+if(empty($_GET['id']))
+{
+    $id=0;
+    $msg="";
+}else{
+    $id=$_GET["id"];
+    $msg="<h6 class='text-center border border-danger text-danger m-1 p-2 rounded'>Usuario o Clave Incorrecto</h6>";
+}
 ?>
-
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -26,13 +33,11 @@ unset($_COOKIE['reloginID']);
   <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css?version=4.5.0">
+  <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
   <style>
   body {background-image: url("https://source.unsplash.com/1920x1080/?nature");background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color:#a31b0f;}
-  fieldset {background-color:#fff;border: 3px solid #eee; !important;padding: 1.4em 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;}
+  fieldset {background-color:rgba(255, 255, 255, 0.65);border: 1px solid #053481; !important;padding: 1.4em 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;}
   </style>
 </head>
 <body>
@@ -50,6 +55,7 @@ unset($_COOKIE['reloginID']);
                   <input name="formSubmit" type="hidden" id="formSubmit" value="yes">
 	                <button class="btn btn-primary btn-block mt-3" type="submit">Ingresar</button>
                 </form>
+                <?=$msg?>
             </fieldset>
             </div>
         </div>

@@ -49,7 +49,7 @@ $conn->close();
             <div class="card">
                 <div class="card-header"><h3><i class="far fa-edit"></i> Editar Usuario</h3><h5> <span class="text-secondary">(Todos los campos son obligatorios)</span></h5></div>
                 <div class="card-body">
-                    <form id='form_book' name='form_book' action='usr_save.php' method='post' >
+                    <form id='form_data' action='usr_save.php' method='post' >
                         <div class="row p-2">			
                             <div class="col-md">
                             <label>Nombre</label>
@@ -79,7 +79,7 @@ $conn->close();
             <div class="card mt-3">
                 <div class="card-header"><h3><i class="far fa-edit"></i> Cambiar Clave</h3></div>
                 <div class="card-body">
-                    <form id='form_book' name='form_book' action='usr_pass.php' method='post' >
+                    <form id='form_pass' name='form_pass' action='usr_pass.php' method='post' >
                     
                         <div class="row p-2">			
                             <div class="col-md">
@@ -97,7 +97,7 @@ $conn->close();
                             <span class="float-right">
                             <button type="submit" id="btnGuardarPass" class='btn btn-outline-primary' disabled><i class="far fa-save"></i>&nbsp;Cambiar</button>
                             </span>
-                            <input name="usr_id" type="hidden" id="usr_id" value="<?=$usr_id?>">
+                            <input name="usr_id_pass" type="hidden" id="usr_id_pass" value="<?=$usr_id?>">
                             </div>
                         </div>
                     </form>
@@ -117,7 +117,7 @@ $conn->close();
         var btnGuardar = document.getElementById('btnGuardarPass');
         var pass_error  = "<h6 class='text-center border border-danger m-1 p-2 rounded'><i class='far fa-times-circle text-danger'></i> Las Claves No Coinciden</h6>";
         var pass_ok     = "<h6 class='text-center border border-success m-1 p-2 rounded'><i class='far fa-times-circle text-success'></i> Las Claves Coinciden</h6>";
-        var pass_long   =  "<h6 class='text-center border border-primary m-1 p-2 rounded'><i class='far fa-times-circle text-primary'></i> Minimo 10 Caracteres</h6>";
+        var pass_long   = "<h6 class='text-center border border-primary m-1 p-2 rounded'><i class='far fa-times-circle text-primary'></i> Minimo 10 Caracteres</h6>";
         
         if(usr_pass_value.length >= 10){
             if(usr_pass_value == usr_pass_confirm_value){

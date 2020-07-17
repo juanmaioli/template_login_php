@@ -7,7 +7,7 @@ include("config.php");
 $conn = new mysqli($db_server, $db_user,$db_pass,$db_name,$db_serverport);
 mysqli_set_charset($conn,'utf8');
 
-$usr_id = $_POST['usr_id'];
+$usr_id = $_POST['usr_id_pass'];
 $usr_pass_confirm = $_POST['usr_pass_confirm'];
 
 $usr_pass_confirm = $conn->escape_string($usr_pass_confirm);

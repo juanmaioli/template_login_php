@@ -20,11 +20,13 @@ else
 //User Data
   $usuarioMail = $_SESSION["usuario"];
   $usr_image = $_SESSION["avatar"];
-  $usr_timezone = $_SESSION["time_zone"];
-  if ($usr_timezone==1){
+  $usr_right = $_SESSION["right"];
+  if ($usr_right==1){
     //Admin Menu
-    $menu_admin ="<a href='admin.php' class='dropdown-item text-white bg-dark'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;Admin</a>";
-  }else{$menu_admin="";}
+    $menu_admin ="<a href='admin.php' class='dropdown-item text-white'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;Admin</a>";
+  }else{ 
+    $menu_admin ="<a href='#' class='dropdown-item text-white'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;No Admin</a>";
+  }
 
 
   $conn = new mysqli($db_server, $db_user,$db_pass,$db_name,$db_serverport);
@@ -50,11 +52,9 @@ else
         $usr_image = $row["usr_image"];
         $usr_pass = $row["usr_pass"];
         $usr_token = $row["usr_token"];
-        $usr_timezone = $row["usr_timezone"];
         $usr_right = $row["usr_right"];
       }
   }
-
 $conn->close();
 ?>
 <html lang="es">
@@ -66,14 +66,12 @@ $conn->close();
     <meta name="author" content="Juan Maioli">
     <meta name="author" content="https://github.com/juanmaioli">
     <title>Template Login</title>
-    <!-- Bootstrap core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-     <!-- fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-   
+   <!-- Bootstrap core CSS -->
+   <link rel="stylesheet" href="css/bootstrap.min.css?version=4.5.0">
+    <!-- fontawesome.com -->
+    <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="css/new.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/style.css?version=1.1" >
     <!-- Favicon for this template -->
     <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
@@ -92,6 +90,7 @@ $conn->close();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <script src="js/jquery-3.5.1.min.js?version=3.5.1"></script>
   </head>
 
 <body class="fixed-nav" id="page-top">
@@ -103,7 +102,7 @@ $conn->close();
   </div>
   <!-- /Logo -->
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -111,8 +110,8 @@ $conn->close();
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav ml-5">
         <li class="nav-item dropdown text-left">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown"><i class='fas fa-ellipsis-v text-info fa-lg'></i>&nbsp;Menú</a>
-          <div class="dropdown-menu bg-dark">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown"><i class='fas fa-ellipsis-v text-secondary fa-lg'></i>&nbsp;Menú</a>
+          <div class="dropdown-menu">
             <?=$menu_admin?>
           </div>
         </li>
@@ -121,18 +120,17 @@ $conn->close();
       <!-- /Dropdown -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-lg-block">
-          <form action='usr_edit.php' method='post'>
-            <input type='hidden' name='id' id='id' value="<?=$usr_id?>">
-            <a class="nav-link" href='#' onclick='this.parentNode.submit();'><img class="profile-img1 border border-primary" src="<?=$usr_image?>"></a>
-          </form>
+
+            <a class="nav-link" href='#'><img class="profile-img1 border border-primary" src="<?=$usr_image?>"></a>
+
         </li>
         <li class="nav-item">
         <form action='usr_edit.php' method='post'>
             <input type='hidden' name='id' id='id' value="<?=$usr_id?>">
-            <a class="nav-link" href='#' onclick='this.parentNode.submit();'><?=$usr_name . " " . $usr_lastname?></a>
+            <a class="nav-link text-white" href='#' onclick='this.parentNode.submit();'><?=$usr_name . " " . $usr_lastname?></a>
         </form>
         </li>
-        <li class="nav-item" title="Cerrar Sesion"><a class="nav-link small" href="logout.php"><i class="fas fa-sign-out-alt text-danger fa-lg"></i>Salir</a>
+        <li class="nav-item" title="Cerrar Sesion"><a class="nav-link text-white" href="logout.php"><i class="fas fa-sign-out-alt text-danger fa-lg"></i>Salir</a>
         </li>
       </ul>
     </div>

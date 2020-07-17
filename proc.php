@@ -4,7 +4,6 @@ include("config.php");
 $usr_email	= $_POST['usr_email'];
 $usr_passwd = $_POST['usr_passwd'];
 $usr_passwd =  hash('sha256', $usr_passwd );
-
 $ip = $_SERVER['REMOTE_ADDR'];
 $dateShow = new DateTime(date("Y-m-d H:i:s"));
 $dateShow = $dateShow->format('Y-m-d H:i:s');
@@ -35,7 +34,7 @@ if($usrExiste == true )
     $_SESSION["usuario_id"] = $usr_id;
     $_SESSION["usuario"] = $usr_email;
     $_SESSION["avatar"] = $usr_image;
-    $_SESSION["time_zone"] = $usr_right;
+    $_SESSION["right"] = $usr_right;
     $_SESSION["loggedin"] = true;
 
     if ($www_https == "on") {
@@ -51,7 +50,7 @@ if($usrExiste == true )
 }
 else
 {
-  header('Location: login.php');
+  header('Location: login.php?id=1');
 }
 
 $conn->close();

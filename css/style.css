@@ -1,7 +1,14 @@
+/* Template Login Style Sheet V1.0*/
 body{font-family:"Helvetica";}
 .profile-img1{height: 25px;display: block;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .profile-img2{height: 90px;margin: 0 auto 10px;display: block;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
-.profile-big{height:300px;width: 300px;display: block;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
-.footer {position: fixed;left:0;bottom: 0;width: 100%;text-align: center;line-height: 35px; }
-.separador{height:6em}
+.footer {position: fixed;left:0;bottom: 0;width: 100%;text-align: center;line-height: 35px; background-color:#801128;}
+.card-body-icon {position: absolute;z-index: 0;top: 10px;left: 10px;color:#fff;text-shadow: 3px 3px 16px #272634;}
+.card-dolar{height: 300px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+.card{box-shadow: 0 4px 8px 0 rgba(185, 134, 134, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);}
+.card-200{min-height: 200px;}
+.navbar {background-color:#801128;}
+.dropdown-menu{background-color:#801128;}
+.dropdown-item:hover{background-color:#f31a63;color:#fff;}
 input[type="file"] {display: none;}
+.separador{height:6em}
