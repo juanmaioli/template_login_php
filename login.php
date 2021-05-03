@@ -46,7 +46,7 @@ if(empty($_GET['id']))
         <div class="col-md-4 mx-auto my-auto">
           <fieldset>
                 <div class="text-center"><img class="img-fluid" src="images/logo.png" width="" alt=""></div>
-                <form  ACTION="proc.php" name="form1" method="POST">
+                <form  ACTION="validate_login.php" name="form1" method="POST">
 	              <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
 	              <div class="input-group mt-3">
                 <input name="usr_passwd" type="password" id="usr_passwd" class="form-control" placeholder="Contrase&ntilde;a" required>
