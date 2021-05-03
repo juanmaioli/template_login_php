@@ -3,6 +3,15 @@ include("config.php");
 
 $usr_email	= $_POST['usr_email'];
 $usr_passwd = $_POST['usr_passwd'];
+
+if(empty($_POST['usr_remember']))
+{
+  $usr_remember = 1;
+}else{
+  $usr_remember = 1000;
+}
+
+echo $usr_remember;
 $usr_passwd =  hash('sha256', $usr_passwd );
 $ip = $_SERVER['REMOTE_ADDR'];
 $dateShow = new DateTime(date("Y-m-d H:i:s"));
@@ -39,10 +48,10 @@ if($usrExiste == true )
 
     if ($www_https == "on") {
       echo "con https";
-      setcookie('reloginID', hash('sha256', $usr_email )  . ":".$usr_id, time()+60*60*24, '/',  $www_host   , true, true);
+      setcookie($site_cookie, hash('sha256', $usr_email )  . ":".$usr_id, time()+60*60*24*$usr_remember, '/',  $www_host   , true, true);
     }else {
       echo "sin https";
-      setcookie('reloginID', hash('sha256', $usr_email )  . ":".$usr_id, time()+60*60*24, '/',  $www_host  , false, true);
+      setcookie($site_cookie, hash('sha256', $usr_email )  . ":".$usr_id, time()+60*60*24*$usr_remember, '/',  $www_host  , false, true);
     }
     $sql = "INSERT INTO " . $table_pre . "session(sess_usr,sess_ip,sess_date,sess_action) values('". $usr_id ."','" . $ip . "','" . $dateShow ."',1)";
     $result = $conn->query($sql);

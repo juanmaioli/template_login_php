@@ -6,8 +6,8 @@ if ( $_SESSION["loggedin"] == false) {
 exit();
 }
 
-if( isset( $_COOKIE['reloginID'])) {
-  $datos = $_COOKIE['reloginID'];
+if( isset( $_COOKIE[$site_cookie])) {
+  $datos = $_COOKIE[$site_cookie];
   $datosCuenta = explode(":", $datos);
   $usuarioId = $datosCuenta[1];
 }

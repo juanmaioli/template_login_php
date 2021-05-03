@@ -1,5 +1,5 @@
 <?php
-unset($_COOKIE['reloginID']);
+//unset($_COOKIE['reloginID']);
 if(empty($_GET['id']))
 {
     $id=0;
@@ -51,6 +51,11 @@ if(empty($_GET['id']))
 	              <div class="input-group mt-3">
                 <input name="usr_passwd" type="password" id="usr_passwd" class="form-control" placeholder="Contrase&ntilde;a" required>
                   <div class="input-group-append"><span class="input-group-text"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span></div>
+                </div>
+                <div class="form-group form-check m-2">
+                  <label class="form-check-label text-primary small">
+                    <input class="form-check-input" type="checkbox" id="usr_remember" name="usr_remember" value="sip"> Recordarme en este equipo
+                  </label>
                 </div>
                   <input name="formSubmit" type="hidden" id="formSubmit" value="yes">
 	                <button class="btn btn-primary btn-block mt-3" type="submit">Ingresar</button>

@@ -3,7 +3,7 @@ include("config.php");
 $ip = $_SERVER['REMOTE_ADDR'];
 $dateShow = new DateTime(date("Y-m-d H:i:s"));
 $dateShow = $dateShow->format('Y-m-d H:i:s');
-  session_start();
+session_start();
   if( isset( $_COOKIE['reloginID'])) {
     $datos = $_COOKIE['reloginID'];
     $datosCuenta = explode(":", $datos);
@@ -16,6 +16,6 @@ $dateShow = $dateShow->format('Y-m-d H:i:s');
   unset ($_SESSION["loggedin"]);
   unset ($_SESSION["usuario_id"]);
   session_destroy();
-  unset($_COOKIE['reloginID']);
+  unset($_COOKIE[$site_cookie]);
   header('Location: login.php');
 ?>
