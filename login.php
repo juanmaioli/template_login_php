@@ -47,18 +47,21 @@ if(empty($_GET['id']))
           <fieldset>
                 <div class="text-center"><img class="img-fluid" src="images/logo.png" width="" alt=""></div>
                 <form  ACTION="validate_login.php" name="form1" method="POST">
-	              <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
-	              <div class="input-group mt-3">
-                <input name="usr_passwd" type="password" id="usr_passwd" class="form-control" placeholder="Contrase&ntilde;a" required>
-                  <div class="input-group-append"><span class="input-group-text"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span></div>
+                <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="usr_passwd" name="usr_passwd" placeholder="Contrase&ntilde;a" required>
+                  <span class="input-group-text" id="basic-addon2"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span>
                 </div>
+
+
+
                 <div class="form-group form-check m-2">
-                  <label class="form-check-label text-primary small">
+                    <label class="form-check-label text-primary small">
                     <input class="form-check-input" type="checkbox" id="usr_remember" name="usr_remember" value="sip"> Recordarme en este equipo
                   </label>
                 </div>
                   <input name="formSubmit" type="hidden" id="formSubmit" value="yes">
-	                <button class="btn btn-primary btn-block mt-3" type="submit">Ingresar</button>
+                  <button class="btn btn-primary btn-block mt-3" type="submit">Ingresar</button>
                 </form>
                 <?=$msg?>
             </fieldset>
