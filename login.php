@@ -36,7 +36,7 @@ if(empty($_GET['id']))
   <link rel="stylesheet" href="css/bootstrap.min.css?version=4.5.0">
   <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
   <style>
-  body {background-image: url("https://source.unsplash.com/1920x1080/?nature");background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color:#a31b0f;}
+  body {background-image: url("https://juanmaioli.com.ar/rnd_img/");background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color:#a31b0f;}
   fieldset {background-color:rgba(255, 255, 255, 0.65);border: 1px solid #053481; !important;padding: 1.4em 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;}
   </style>
 </head>
@@ -49,7 +49,7 @@ if(empty($_GET['id']))
                 <form  ACTION="validate_login.php" name="form1" method="POST">
                 <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" id="usr_passwd" name="usr_passwd" placeholder="Contrase&ntilde;a" required>
+                  <input type="password" class="form-control" id="usr_passwd" name="usr_passwd" placeholder="Contrase&ntilde;a" required>
                   <span class="input-group-text" id="basic-addon2"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span>
                 </div>
 
