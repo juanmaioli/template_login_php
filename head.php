@@ -69,7 +69,7 @@ $conn->close();
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css?version=5.1.0">
   <!-- fontawesome.com -->
-  <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
+  <link rel="stylesheet" href="css/all.min.css?version=6.0.0">
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href="css/style.css?version=1.1" >
   <!-- Bootstrap core JS -->
