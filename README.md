@@ -13,7 +13,8 @@ Una plantilla robusta y segura para sistemas de autenticación y gestión de usu
 - 🔑 **Hashing Moderno:** Almacenamiento de contraseñas utilizando el algoritmo **BCRYPT** (`password_hash`).
 - ⚡ **Optimización:** Sistema de caché de sesión para reducir la carga en la base de datos.
 - 🍪 **Cookies Seguras:** Configuración con flags `HttpOnly`, `Secure` y `SameSite` para prevenir ataques XSS y CSRF.
-- 🎨 **Interfaz Moderna:** Diseño responsivo basado en **Bootstrap 5.1** y **Font Awesome 6**.
+- 🎨 **Interfaz Moderna:** Diseño responsivo basado en **Bootstrap 5.3** y **Font Awesome 6**.
+- 🌗 **Selector de Tema:** Modo claro/oscuro automático con selector manual y persistencia local.
 - 🛠️ **Gestión de Usuarios:** Panel administrativo para el alta, baja, edición y gestión de perfiles (incluyendo imágenes).
 
 ## 2. 🚀 Instalación Rápida

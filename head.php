@@ -54,7 +54,7 @@ else
 
 $conn->close();
 ?>
-<html lang="es">
+<html lang="es" data-bs-theme="auto">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,14 +63,78 @@ $conn->close();
   <meta name="author" content="Juan Maioli">
   <meta name="author" content="https://github.com/juanmaioli">
   <title>Template Login</title>
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css?version=5.1.0">
+  
+  <script>
+    /**
+     * Script para detección automática de tema (UpdateUI)
+     */
+    const getStoredTheme = () => localStorage.getItem('theme')
+    const getPreferredTheme = () => {
+      const storedTheme = getStoredTheme()
+      if (storedTheme) {
+        return storedTheme
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    const setTheme = theme => {
+      if (theme === 'auto') {
+        document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+      } else {
+        document.documentElement.setAttribute('data-bs-theme', theme)
+      }
+    }
+
+    setTheme(getPreferredTheme())
+
+    const showActiveTheme = (theme, focus = false) => {
+      const themeSwitcher = document.querySelector('#bd-theme')
+      if (!themeSwitcher) return
+      
+      const activeThemeIcon = document.querySelector('.theme-icon-active')
+      const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+      const iconOfActiveBtn = btnToActive.querySelector('i').dataset.icon
+
+      document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+        element.classList.remove('active')
+        element.setAttribute('aria-pressed', 'false')
+      })
+
+      btnToActive.classList.add('active')
+      btnToActive.setAttribute('aria-pressed', 'true')
+      activeThemeIcon.className = `fas ${iconOfActiveBtn} theme-icon-active`
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      const storedTheme = getStoredTheme()
+      if (storedTheme !== 'light' && storedTheme !== 'dark') {
+        setTheme(getPreferredTheme())
+      }
+    })
+
+    window.addEventListener('DOMContentLoaded', () => {
+      showActiveTheme(getPreferredTheme())
+
+      document.querySelectorAll('[data-bs-theme-value]')
+        .forEach(toggle => {
+          toggle.addEventListener('click', () => {
+            const theme = toggle.getAttribute('data-bs-theme-value')
+            localStorage.setItem('theme', theme)
+            setTheme(theme)
+            showActiveTheme(theme, true)
+          })
+        })
+    })
+  </script>
+
+  <!-- Bootstrap core CSS 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- fontawesome.com -->
   <link rel="stylesheet" href="css/all.min.css?version=6.0.0">
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href="css/style.css?version=1.1" >
   <!-- Bootstrap core JS -->
-  <script src="js/bootstrap.bundle.min.js?version=5.1.0"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Favicon for this template -->
   <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
@@ -129,6 +193,32 @@ $conn->close();
                   <input type='hidden' name='id' id='id' value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                   <a class="nav-link text-white" href='#' onclick='this.parentNode.submit();'><?=htmlspecialchars($usr_name . " " . $usr_lastname, ENT_QUOTES, 'UTF-8')?></a>
               </form>
+            </li>
+            <li class="nav-item dropdown" title="Cambiar Tema">
+              <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
+                <i class="fas fa-circle-half-stroke theme-icon-active"></i>
+                <span class="d-lg-none ms-2">Tema</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-theme-text">
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                    <i class="fas fa-sun me-2 opacity-50" data-icon="fa-sun"></i>
+                    Claro
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                    <i class="fas fa-moon me-2 opacity-50" data-icon="fa-moon"></i>
+                    Oscuro
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                    <i class="fas fa-circle-half-stroke me-2 opacity-50" data-icon="fa-circle-half-stroke"></i>
+                    Automático
+                  </button>
+                </li>
+              </ul>
             </li>
             <li class="nav-item" title="Cerrar Sesion">
               <a class="nav-link text-white" href="logout.php"><i class="fas fa-sign-out-alt text-danger fa-lg"></i>Salir</a>
