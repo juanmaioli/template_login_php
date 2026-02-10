@@ -90,7 +90,28 @@ if($row = $result->fetch_assoc())
 
                 
 
-                setcookie($site_cookie, hash('sha256', $usr_email) . ":" . $usr_id, $cookie_options);
+                // Gestión del "Recordarme" con tokens
+                if(isset($_POST['usr_remember'])){
+                    $token = bin2hex(random_bytes(32));
+                    $token_hash = hash('sha256', $token);
+                    
+                    $sql_token = "UPDATE " . $table_pre . "usr SET usr_token = ? WHERE usr_id = ?";
+                    $stmt_token = $conn->prepare($sql_token);
+                    $stmt_token->bind_param("si", $token_hash, $usr_id);
+                    $stmt_token->execute();
+                    $stmt_token->close();
+                    
+                    $cookie_value = $usr_id . ':' . $token;
+                    setcookie($site_cookie, $cookie_value, $cookie_options);
+
+                } else {
+                    // Si no se marca, limpiar cualquier token existente
+                    $sql_token_clear = "UPDATE " . $table_pre . "usr SET usr_token = NULL WHERE usr_id = ?";
+                    $stmt_token_clear = $conn->prepare($sql_token_clear);
+                    $stmt_token_clear->bind_param("i", $usr_id);
+                    $stmt_token_clear->execute();
+                    $stmt_token_clear->close();
+                }
         
         $stmt->close();
         $sql_sess = "INSERT INTO " . $table_pre . "session(sess_usr, sess_ip, sess_date, sess_action) VALUES (?, ?, ?, 1)";

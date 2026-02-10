@@ -14,6 +14,15 @@ session_start();
 
   $conn = new mysqli($db_server, $db_user,$db_pass,$db_name,$db_serverport);
   
+  // Limpiar el token de "Recordarme"
+  if($usuarioId > 0) {
+      $sql_token_clear = "UPDATE " . $table_pre . "usr SET usr_token = NULL WHERE usr_id = ?";
+      $stmt_token_clear = $conn->prepare($sql_token_clear);
+      $stmt_token_clear->bind_param("i", $usuarioId);
+      $stmt_token_clear->execute();
+      $stmt_token_clear->close();
+  }
+
   // Sentencia preparada para registrar el logout
   $sql = "INSERT INTO " . $table_pre . "session(sess_usr, sess_ip, sess_date, sess_action) VALUES (?, ?, ?, 2)";
   $stmt = $conn->prepare($sql);

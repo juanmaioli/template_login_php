@@ -1,5 +1,6 @@
 <?php
 include("config.php");
+
 // Configuración de sesión segura antes de iniciarla
 session_set_cookie_params([
     'lifetime' => 0,
@@ -10,6 +11,37 @@ session_set_cookie_params([
     'samesite' => 'Lax'
 ]);
 session_start();
+
+// Lógica de "Recordarme"
+if (!isset($_SESSION["loggedin"]) && isset($_COOKIE[$site_cookie])) {
+    list($user_id, $token) = explode(':', $_COOKIE[$site_cookie], 2);
+
+    if ($user_id && $token) {
+        $conn_token = new mysqli($db_server, $db_user, $db_pass, $db_name, $db_serverport);
+        $sql = "SELECT usr_token, usr_name, usr_lastname, usr_email, usr_image, usr_right FROM " . $table_pre . "usr WHERE usr_id = ?";
+        $stmt = $conn_token->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($user = $result->fetch_assoc()) {
+            if ($user['usr_token'] && hash_equals($user['usr_token'], hash('sha256', $token))) {
+                // Token válido, re-autenticar
+                session_regenerate_id(true);
+                $_SESSION["loggedin"] = true;
+                $_SESSION["usuario_id"] = $user_id;
+                $_SESSION["usuario"] = $user["usr_email"];
+                $_SESSION["nombre"] = $user["usr_name"];
+                $_SESSION["apellido"] = $user["usr_lastname"];
+                $_SESSION["avatar"] = $user["usr_image"];
+                $_SESSION["right"] = $user["usr_right"];
+            }
+        }
+        $stmt->close();
+        $conn_token->close();
+    }
+}
+
 if ( $_SESSION["loggedin"] == false) {
    header('Location: login.php');
 exit();
@@ -54,6 +86,7 @@ else
 
 $conn->close();
 ?>
+<!DOCTYPE html>
 <html lang="es" data-bs-theme="auto">
 <head>
   <meta charset="utf-8">
