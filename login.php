@@ -64,35 +64,45 @@ if(empty($_GET['id']))
     background-attachment: fixed;
     background-size: cover;
     background-color:#a31b0f;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+  }
+  .login-container {
+    height: 100%;
+  }
+  .login-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Blanco con 90% de opacidad */
   }
   fieldset {
-    background-color: var(--bs-body-bg);
-    opacity: 0.9;
-    border: 1px solid var(--bs-border-color);
-    padding: 1.4em 1.4em 1.4em 1.4em !important;
-    margin: 0 0 1.5em 0 !important;
-    border-radius: 15px;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    width: 100%;
+    max-width: 450px; /* Opcional: para que no se estire demasiado en pantallas grandes */
+    margin: 0 auto;
+    border: none;
+    padding: 2em;
+    border-radius: 0; 
   }
-  [data-bs-theme="dark"] fieldset {
-    background-color: rgba(33, 37, 41, 0.85);
+  [data-bs-theme="dark"] .login-form {
+    background-color: rgba(33, 37, 41, 0.9); /* Color oscuro de BS con 90% de opacidad */
   }
   </style>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid login-container">
     <div class="row h-100">
-        <div class="col-md-4 mx-auto my-auto">
+        <div class="col-lg-3 col-md-4 col-sm-12 p-0 login-form">
           <fieldset>
-                <div class="text-center"><img class="img-fluid" src="images/logo.png" width="" alt=""></div>
+                <div class="text-center mb-4"><img class="img-fluid" src="images/logo.png" width="200" alt=""></div>
                 <form  ACTION="validate_login.php" name="form1" method="POST">
                 <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
-                <div class="input-group mb-3">
+                <div class="input-group my-3">
                   <input type="password" class="form-control" id="usr_passwd" name="usr_passwd" placeholder="Contraseña" required>
                   <span class="input-group-text" id="basic-addon2"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span>
                 </div>
-
-
 
                 <div class="form-group form-check m-2">
                     <label class="form-check-label text-primary small">
@@ -100,13 +110,16 @@ if(empty($_GET['id']))
                   </label>
                 </div>
                   <input name="formSubmit" type="hidden" id="formSubmit" value="yes">
-                  <button class="btn btn-primary btn-block mt-3 w-100" type="submit">Ingresar</button>
+                  <button class="btn btn-primary w-100 mt-3" type="submit">Ingresar</button>
                 </form>
                 <?=$msg?>
             </fieldset>
-            </div>
+        </div>
+        <div class="col-lg-9 col-md-8 d-none d-md-block p-0">
+            <!-- El fondo dinámico ocupará este espacio -->
         </div>
     </div>
+</div>
     <script>
     function passClear(){
       var password = document.getElementById('usr_passwd');
