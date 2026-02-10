@@ -1,5 +1,14 @@
 <?php
 include("config.php");
+// Configuración de sesión segura antes de iniciarla
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => $www_host,
+    'secure' => ($www_https == "on"),
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
 session_start();
 if ( $_SESSION["loggedin"] == false) {
    header('Location: login.php');
@@ -18,9 +27,13 @@ else
 }
 
 //User Data
+  $usr_id = $_SESSION["usuario_id"];
   $usuarioMail = $_SESSION["usuario"];
+  $usr_name = $_SESSION["nombre"];
+  $usr_lastname = $_SESSION["apellido"];
   $usr_image = $_SESSION["avatar"];
   $usr_right = $_SESSION["right"];
+
   if ($usr_right==1){
     //Admin Menu
     $menu_admin ="<a href='admin.php' class='dropdown-item text-white'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;Admin</a>";
@@ -38,23 +51,7 @@ else
   $dateShow = new DateTime(date("Y-m-d H:i:s"));
   $dateForm = $dateShow->format('Y-m-d');
   $dateShow = $dateShow->format('Y-m-d H:i:s');
-//Usuario
-  $sql = "SELECT * FROM " . $table_pre . "usr where usr_email = '". $usuarioMail . "'";
-  $result = $conn->query($sql);
-  
-  if (mysqli_num_rows($result) == true) {
-    while($row = $result->fetch_assoc())
-      {
-        $usr_id = $row["usr_id"];
-        $usr_name = $row["usr_name"];
-        $usr_lastname = $row["usr_lastname"];
-        $usr_email = $row["usr_email"];
-        $usr_image = $row["usr_image"];
-        $usr_pass = $row["usr_pass"];
-        $usr_token = $row["usr_token"];
-        $usr_right = $row["usr_right"];
-      }
-  }
+
 $conn->close();
 ?>
 <html lang="es">
@@ -125,12 +122,12 @@ $conn->close();
           <a class="navbar-brand me-auto" href="index.php"><i class="fas fa-cat fa-2x"></i>&nbsp; Template Login</a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link" href='#'><img class="profile-img1 border border-primary" src="<?=$usr_image?>"></a>
+                <a class="nav-link" href='#'><img class="profile-img1 border border-primary" src="<?=htmlspecialchars($usr_image, ENT_QUOTES, 'UTF-8')?>"></a>
             </li>
             <li class="nav-item">
               <form action='usr_edit.php' method='post'>
-                  <input type='hidden' name='id' id='id' value="<?=$usr_id?>">
-                  <a class="nav-link text-white" href='#' onclick='this.parentNode.submit();'><?=$usr_name . " " . $usr_lastname?></a>
+                  <input type='hidden' name='id' id='id' value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
+                  <a class="nav-link text-white" href='#' onclick='this.parentNode.submit();'><?=htmlspecialchars($usr_name . " " . $usr_lastname, ENT_QUOTES, 'UTF-8')?></a>
               </form>
             </li>
             <li class="nav-item" title="Cerrar Sesion">

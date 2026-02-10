@@ -3,27 +3,27 @@ include("head.php");
 $id = $_POST["id"];
 $conn = new mysqli($db_server, $db_user,$db_pass,$db_name,$db_serverport);
 
-mysqli_set_charset($conn,'utf8');
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
 
-$sql = "SELECT * FROM " . $table_pre . "usr where usr_id= '". $id . "'";
-$result = $conn->query($sql);
+$sql = "SELECT usr_id, usr_name, usr_lastname, usr_email, usr_image, usr_pass, usr_token, usr_timezone, usr_right FROM " . $table_pre . "usr where usr_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if (mysqli_num_rows($result) == true) {
-  while($row = $result->fetch_assoc())
-    {
-        $usr_id = $row["usr_id"];
-        $usr_name = $row["usr_name"];
-        $usr_lastname = $row["usr_lastname"];
-        $usr_email = $row["usr_email"];
-        $usr_image = $row["usr_image"];
-        $usr_pass = $row["usr_pass"];
-        $usr_token = $row["usr_token"];
-        $usr_timezone = $row["usr_timezone"];
-        $usr_right = $row["usr_right"];
-    }
+if ($row = $result->fetch_assoc()) {
+    $usr_id = $row["usr_id"];
+    $usr_name = $row["usr_name"];
+    $usr_lastname = $row["usr_lastname"];
+    $usr_email = $row["usr_email"];
+    $usr_image = $row["usr_image"];
+    $usr_pass = $row["usr_pass"];
+    $usr_token = $row["usr_token"];
+    $usr_timezone = $row["usr_timezone"];
+    $usr_right = $row["usr_right"];
 }
+$stmt->close();
 
 $conn->close();
 ?>
@@ -35,9 +35,9 @@ $conn->close();
         <div class="card">
                 <div class="card-header"><h3><i class="far fa-image"></i> Imagen</h3></div>
                 <div class="card-body text-center">
-                <img src="<?=$usr_image?>" class="img-fluid">
+                <img src="<?=htmlspecialchars($usr_image, ENT_QUOTES, 'UTF-8')?>" class="img-fluid">
                 <form action="usr_img.php" method="post" enctype="multipart/form-data">
-                    <input id="image_usr_id" name="image_usr_id" type="hidden" value="<?=$usr_id?>">
+                    <input id="image_usr_id" name="image_usr_id" type="hidden" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                     <label for="file-upload" class="custom-file-upload btn btn-outline-primary m-2">
                     <i class="far fa-cloud-upload-alt"></i> Elegir Imagen</label>
                     <input id="file-upload" name="file-upload" type="file" accept=".jpeg, .jpg" onChange="this.form.submit()">
@@ -53,15 +53,15 @@ $conn->close();
                         <div class="row p-2">			
                             <div class="col-md">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="usr_name" id="usr_name"  placeholder="Nombre" value="<?=$usr_name?>" required>
+                            <input type="text" class="form-control" name="usr_name" id="usr_name"  placeholder="Nombre" value="<?=htmlspecialchars($usr_name, ENT_QUOTES, 'UTF-8')?>" required>
                             </div>
                             <div class="col-md">
                             <label>Apellido</label>
-                            <input type="text" class="form-control" name="usr_lastname" id="usr_lastname"  placeholder="Apellido" value="<?=$usr_lastname?>" required>
+                            <input type="text" class="form-control" name="usr_lastname" id="usr_lastname"  placeholder="Apellido" value="<?=htmlspecialchars($usr_lastname, ENT_QUOTES, 'UTF-8')?>" required>
                             </div>
                             <div class="col-md">
                             <div id="email" name="email"><label >Email</label></div>
-                            <input type="text" class="form-control" name="usr_email" id="usr_email"  placeholder="Email" value="<?=$usr_email?>" onblur="validateEmail(this);" required>
+                            <input type="text" class="form-control" name="usr_email" id="usr_email"  placeholder="Email" value="<?=htmlspecialchars($usr_email, ENT_QUOTES, 'UTF-8')?>" onblur="validateEmail(this);" required>
                             </div>
                         </div>
                         <div class="row p-2">			
@@ -70,7 +70,7 @@ $conn->close();
                                 <span class="float-right">
                                 <button type="submit" id="btnGuardar" class='btn btn-outline-primary'><i class="far fa-save"></i>&nbsp;Guardar</button>
                                 </span>
-                                <input name="usr_id" type="hidden" id="usr_id" value="<?=$usr_id?>">
+                                <input name="usr_id" type="hidden" id="usr_id" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                             </div>
                         </div>
                     </form>
@@ -97,7 +97,7 @@ $conn->close();
                             <span class="float-right">
                             <button type="submit" id="btnGuardarPass" class='btn btn-outline-primary' disabled><i class="far fa-save"></i>&nbsp;Cambiar</button>
                             </span>
-                            <input name="usr_id_pass" type="hidden" id="usr_id_pass" value="<?=$usr_id?>">
+                            <input name="usr_id_pass" type="hidden" id="usr_id_pass" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                             </div>
                         </div>
                     </form>

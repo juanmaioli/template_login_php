@@ -36,7 +36,7 @@ if(empty($_GET['id']))
   <link rel="stylesheet" href="css/bootstrap.min.css?version=4.5.0">
   <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
   <style>
-  body {background-image: url("https://juanmaioli.com.ar/rnd_img/");background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color:#a31b0f;}
+  body {background-image: url("../rnd_img/index.php?id=anime");background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color:#a31b0f;}
   fieldset {background-color:rgba(255, 255, 255, 0.65);border: 1px solid #053481; !important;padding: 1.4em 1.4em 1.4em 1.4em !important;margin: 0 0 1.5em 0 !important;-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;}
   </style>
 </head>

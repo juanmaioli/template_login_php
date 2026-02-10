@@ -107,7 +107,7 @@ CREATE TABLE `template_usr`  (
   `usr_delete` int(255) NULL DEFAULT 0,
   PRIMARY KEY (`usr_id`) USING BTREE,
   UNIQUE INDEX `usr_email`(`usr_email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_spanish2_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish2_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of template_usr

@@ -19,9 +19,14 @@ if (!empty($resultado)){
     mb_http_output('UTF-8');
     $conn = new mysqli($db_server, $db_user,$db_pass,$db_name,$db_serverport);
     mysqli_set_charset($conn,'utf8');
-    $sql = "UPDATE " . $table_pre . "usr set usr_image = 'images/usr/" . $usr_id . "-" . strtolower($nombre) . "' WHERE usr_id=" . $usr_id;
-
-    $result = $conn->query($sql);   
+    
+    $image_path = "images/usr/" . $usr_id . "-" . strtolower($nombre);
+    $sql = "UPDATE " . $table_pre . "usr SET usr_image = ? WHERE usr_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $image_path, $usr_id);
+    $stmt->execute();
+    $stmt->close();
+    
     $conn->close();
     
     crop_image_square($nombrer);
