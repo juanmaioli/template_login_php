@@ -9,7 +9,7 @@ Una plantilla robusta y segura para sistemas de autenticación y gestión de usu
 
 ## 1. ✨ Características
 
-- 🛡️ **Seguridad Avanzada:** Inmunidad contra Inyecciones SQL mediante sentencias preparadas (`mysqli`).
+- 🛡️ **Seguridad Avanzada:** Inmunidad contra Inyecciones SQL mediante sentencias preparadas (`mysqli`) en login y logout.
 - 🔑 **Hashing Moderno:** Almacenamiento de contraseñas utilizando el algoritmo **BCRYPT** (`password_hash`).
 - ⚡ **Optimización:** Sistema de caché de sesión para reducir la carga en la base de datos.
 - 🍪 **Cookies Seguras:** Configuración con flags `HttpOnly`, `Secure` y `SameSite` para prevenir ataques XSS y CSRF.
