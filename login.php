@@ -55,7 +55,6 @@ if(empty($_GET['id']))
 
   <!-- Bootstrap core CSS 5.3.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/all.min.css?version=5.13.1">
   <style>
   body {
     background-image: url("../rnd_img/index.php?id=anime");
@@ -101,7 +100,7 @@ if(empty($_GET['id']))
                 <input name="usr_email" type="text" id="usr_email" class="form-control mt-3" placeholder="Email" required autofocus>
                 <div class="input-group my-3">
                   <input type="password" class="form-control" id="usr_passwd" name="usr_passwd" placeholder="Contraseña" required>
-                  <span class="input-group-text" id="basic-addon2"><a href='javascript:void(0);' onclick='passClear()'><i class="far fa-eye-slash" id="eye"></i></a></span>
+                  <span class="input-group-text" id="basic-addon2"><a href='javascript:void(0);' onclick='passClear()' style="text-decoration:none;"><span id="eye">🙈</span></a></span>
                 </div>
 
                 <div class="form-group form-check m-2">
@@ -126,12 +125,10 @@ if(empty($_GET['id']))
       var eye = document.getElementById('eye');
         if(password.getAttribute('type') === 'password'){
             password.setAttribute('type', 'text');
-            eye.classList.remove( "fa-eye-slash");
-            eye.classList.add( "fa-eye");
+            eye.textContent = '👁️';
         } else {
             password.setAttribute('type', 'password');
-            eye.classList.remove( "fa-eye");
-            eye.classList.add( "fa-eye-slash");
+            eye.textContent = '🙈';
         }
         }
     </script>

@@ -7,7 +7,7 @@ include("head.php");
         <div class="col-md-1"></div>
         <div class="col-md-3">
         <div class="card">
-                <div class="card-header"><h3><i class="far fa-image"></i> Imagen</h3></div>
+                <div class="card-header"><h3>🖼️ Imagen</h3></div>
                 <div class="card-body text-center">
                 <img src="images/usr/avatar.png" class="img-fluid">
                 </div>
@@ -15,7 +15,7 @@ include("head.php");
         </div> 
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3><i class="far fa-plus-square"></i> Agregar Usuario</h3><h5> <span class="text-secondary">(Todos los campos son obligatorios)</span></h5></div>
+                <div class="card-header"><h3>➕ Agregar Usuario</h3><h5> <span class="text-secondary">(Todos los campos son obligatorios)</span></h5></div>
                 <div class="card-body">
                     <form id='form_book' name='form_book' action='usr_save.php' method='post' >
                         <div class="row p-2">			
@@ -41,7 +41,7 @@ include("head.php");
                             <div class="col-md p-1 text-center">
                             <span class="float-left"></span>
                             <span class="float-right">
-                            <button type="submit" id="btnGuardar" class='btn btn-outline-primary'><i class="far fa-save"></i>&nbsp;Guardar</button>
+                            <button type="submit" id="btnGuardar" class='btn btn-outline-primary'>💾&nbsp;Guardar</button>
                             </span>
                             <input name="usr_id" type="hidden" id="usr_id" value="0">
                             </div>
@@ -66,8 +66,8 @@ function onlyNumber(e){
 function validateEmail(mail) 
 {
     var emailAlert = document.getElementById("email");
-    var email_error  = "<label class='text-danger'><i class='far fa-times-circle'></i> Email no valido</label>";
-    var email_ok     = "<label class='text-success'><i class='far fa-check-circle'></i> Email valido</label>";
+    var email_error  = "<label class='text-danger'>❌ Email no valido</label>";
+    var email_ok     = "<label class='text-success'>✅ Email valido</label>";
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form_book.usr_email.value))
   {
     emailAlert.innerHTML = email_ok;

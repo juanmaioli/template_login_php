@@ -68,9 +68,9 @@ else
 
   if ($usr_right==1){
     //Admin Menu
-    $menu_admin ="<a href='admin.php' class='dropdown-item text-white'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;Admin</a>";
+    $menu_admin ="<a href='admin.php' class='dropdown-item text-white'>🛡️&nbsp;Admin</a>";
   }else{ 
-    $menu_admin ="<a href='#' class='dropdown-item text-white'><i class='fas fa-user-shield text-warning fa-lg'></i>&nbsp;No Admin</a>";
+    $menu_admin ="<a href='#' class='dropdown-item text-white'>🛡️&nbsp;No Admin</a>";
   }
 
 
@@ -120,22 +120,29 @@ $conn->close();
 
     setTheme(getPreferredTheme())
 
-    const showActiveTheme = (theme, focus = false) => {
+    const showActiveTheme = (theme) => {
       const themeSwitcher = document.querySelector('#bd-theme')
       if (!themeSwitcher) return
       
-      const activeThemeIcon = document.querySelector('.theme-icon-active')
-      const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-      const iconOfActiveBtn = btnToActive.querySelector('i').dataset.icon
+      const activeThemeIcon = themeSwitcher.querySelector('span.theme-icon-active')
 
       document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
         element.classList.remove('active')
         element.setAttribute('aria-pressed', 'false')
       })
 
+      const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
       btnToActive.classList.add('active')
       btnToActive.setAttribute('aria-pressed', 'true')
-      activeThemeIcon.className = `fas ${iconOfActiveBtn} theme-icon-active`
+      
+      // Update the active theme icon based on emoji
+      if (theme === 'light') {
+        activeThemeIcon.textContent = '☀️';
+      } else if (theme === 'dark') {
+        activeThemeIcon.textContent = '🌙';
+      } else { // auto
+        activeThemeIcon.textContent = '🌓';
+      }
     }
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -143,6 +150,7 @@ $conn->close();
       if (storedTheme !== 'light' && storedTheme !== 'dark') {
         setTheme(getPreferredTheme())
       }
+      showActiveTheme(getPreferredTheme()) // Update icon on system theme change
     })
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -154,7 +162,7 @@ $conn->close();
             const theme = toggle.getAttribute('data-bs-theme-value')
             localStorage.setItem('theme', theme)
             setTheme(theme)
-            showActiveTheme(theme, true)
+            showActiveTheme(theme)
           })
         })
     })
@@ -162,8 +170,6 @@ $conn->close();
 
   <!-- Bootstrap core CSS 5.3.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- fontawesome.com -->
-  <link rel="stylesheet" href="css/all.min.css?version=6.0.0">
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href="css/style.css?version=1.1" >
   <!-- Bootstrap core JS -->
@@ -207,7 +213,7 @@ $conn->close();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='fas fa-ellipsis-v text-secondary fa-lg'></i>&nbsp;Menú</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">☰&nbsp;Menú</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item text-white" href="#">Action</a></li>
                 <li><a class="dropdown-item text-white" href="#">Another action</a></li>
@@ -216,7 +222,7 @@ $conn->close();
               </ul>
             </li>
           </ul>
-          <a class="navbar-brand me-auto" href="index.php"><i class="fas fa-cat fa-2x"></i>&nbsp; Template Login</a>
+          <a class="navbar-brand me-auto" href="index.php">🐈&nbsp; Template Login</a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" href='#'><img class="profile-img1 border border-primary" src="<?=htmlspecialchars($usr_image, ENT_QUOTES, 'UTF-8')?>"></a>
@@ -229,32 +235,32 @@ $conn->close();
             </li>
             <li class="nav-item dropdown" title="Cambiar Tema">
               <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
-                <i class="fas fa-circle-half-stroke theme-icon-active"></i>
+                <span class="theme-icon-active">🌓</span>
                 <span class="d-lg-none ms-2">Tema</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="bd-theme-text">
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-                    <i class="fas fa-sun me-2 opacity-50" data-icon="fa-sun"></i>
+                    ☀️
                     Claro
                   </button>
                 </li>
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                    <i class="fas fa-moon me-2 opacity-50" data-icon="fa-moon"></i>
+                    🌙
                     Oscuro
                   </button>
                 </li>
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                    <i class="fas fa-circle-half-stroke me-2 opacity-50" data-icon="fa-circle-half-stroke"></i>
+                    🌓
                     Automático
                   </button>
                 </li>
               </ul>
             </li>
             <li class="nav-item" title="Cerrar Sesion">
-              <a class="nav-link text-white" href="logout.php"><i class="fas fa-sign-out-alt text-danger fa-lg"></i>Salir</a>
+              <a class="nav-link text-white" href="logout.php">🚪Salir</a>
             </li>
           </ul>
         </div>

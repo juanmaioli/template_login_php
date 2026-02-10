@@ -33,13 +33,13 @@ $conn->close();
         <div class="col-md-1"></div>
         <div class="col-md-3">
         <div class="card">
-                <div class="card-header"><h3><i class="far fa-image"></i> Imagen</h3></div>
+                <div class="card-header"><h3>🖼️ Imagen</h3></div>
                 <div class="card-body text-center">
                 <img src="<?=htmlspecialchars($usr_image, ENT_QUOTES, 'UTF-8')?>" class="img-fluid">
                 <form action="usr_img.php" method="post" enctype="multipart/form-data">
                     <input id="image_usr_id" name="image_usr_id" type="hidden" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                     <label for="file-upload" class="custom-file-upload btn btn-outline-primary m-2">
-                    <i class="far fa-cloud-upload-alt"></i> Elegir Imagen</label>
+                    ☁️ Elegir Imagen</label>
                     <input id="file-upload" name="file-upload" type="file" accept=".jpeg, .jpg" onChange="this.form.submit()">
                 </form>
                 </div>
@@ -47,7 +47,7 @@ $conn->close();
         </div> 
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h3><i class="far fa-edit"></i> Editar Usuario</h3><h5> <span class="text-secondary">(Todos los campos son obligatorios)</span></h5></div>
+                <div class="card-header"><h3>✏️ Editar Usuario</h3><h5> <span class="text-secondary">(Todos los campos son obligatorios)</span></h5></div>
                 <div class="card-body">
                     <form id='form_data' action='usr_save.php' method='post' >
                         <div class="row p-2">			
@@ -68,7 +68,7 @@ $conn->close();
                             <div class="col-md p-1 text-center">
                             <span class="float-left"></span>
                                 <span class="float-right">
-                                <button type="submit" id="btnGuardar" class='btn btn-outline-primary'><i class="far fa-save"></i>&nbsp;Guardar</button>
+                                <button type="submit" id="btnGuardar" class='btn btn-outline-primary'>💾&nbsp;Guardar</button>
                                 </span>
                                 <input name="usr_id" type="hidden" id="usr_id" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                             </div>
@@ -77,7 +77,7 @@ $conn->close();
                 </div> 
             </div>
             <div class="card mt-3">
-                <div class="card-header"><h3><i class="far fa-edit"></i> Cambiar Clave</h3></div>
+                <div class="card-header"><h3>🔑 Cambiar Clave</h3></div>
                 <div class="card-body">
                     <form id='form_pass' name='form_pass' action='usr_pass.php' method='post' >
                     
@@ -95,7 +95,7 @@ $conn->close();
                             <div class="col-md p-1 text-center">
                             <span id="verificador" class="float-left"></span>
                             <span class="float-right">
-                            <button type="submit" id="btnGuardarPass" class='btn btn-outline-primary' disabled><i class="far fa-save"></i>&nbsp;Cambiar</button>
+                            <button type="submit" id="btnGuardarPass" class='btn btn-outline-primary'>💾&nbsp;Cambiar</button>
                             </span>
                             <input name="usr_id_pass" type="hidden" id="usr_id_pass" value="<?=htmlspecialchars($usr_id, ENT_QUOTES, 'UTF-8')?>">
                             </div>
@@ -115,9 +115,9 @@ $conn->close();
         var usr_pass_value = document.getElementById("usr_pass").value;
         var verificador = document.getElementById("verificador");
         var btnGuardar = document.getElementById('btnGuardarPass');
-        var pass_error  = "<h6 class='text-center border border-danger m-1 p-2 rounded'><i class='far fa-times-circle text-danger'></i> Las Claves No Coinciden</h6>";
-        var pass_ok     = "<h6 class='text-center border border-success m-1 p-2 rounded'><i class='far fa-times-circle text-success'></i> Las Claves Coinciden</h6>";
-        var pass_long   = "<h6 class='text-center border border-primary m-1 p-2 rounded'><i class='far fa-times-circle text-primary'></i> Minimo 10 Caracteres</h6>";
+        var pass_error  = "<h6 class='text-center border border-danger m-1 p-2 rounded'>❌ Las Claves No Coinciden</h6>";
+        var pass_ok     = "<h6 class='text-center border border-success m-1 p-2 rounded'>✅ Las Claves Coinciden</h6>";
+        var pass_long   = "<h6 class='text-center border border-primary m-1 p-2 rounded'>ℹ️ Minimo 10 Caracteres</h6>";
         
         if(usr_pass_value.length >= 10){
             if(usr_pass_value == usr_pass_confirm_value){
@@ -125,9 +125,11 @@ $conn->close();
                 btnGuardar.disabled = false;
             }else{
                 verificador.innerHTML = pass_error;
+                btnGuardar.disabled = true;
             }
         }else{
             verificador.innerHTML = pass_long;
+            btnGuardar.disabled = true;
         }
     }
 
@@ -140,9 +142,9 @@ function onlyNumber(e){
 function validateEmail(mail) 
 {
     var emailAlert = document.getElementById("email");
-    var email_error  = "<label class='text-danger'><i class='far fa-times-circle'></i> Email no valido</label>";
-    var email_ok     = "<label class='text-success'><i class='far fa-check-circle'></i> Email valido</label>";
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form_book.usr_email.value))
+    var email_error  = "<label class='text-danger'>❌ Email no valido</label>";
+    var email_ok     = "<label class='text-success'>✅ Email valido</label>";
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form_data.usr_email.value))
   {
     emailAlert.innerHTML = email_ok;
     return (true)
