@@ -47,17 +47,6 @@ if ( $_SESSION["loggedin"] == false) {
 exit();
 }
 
-if( isset( $_COOKIE[$site_cookie])) {
-  $datos = $_COOKIE[$site_cookie];
-  $datosCuenta = explode(":", $datos);
-  $usuarioId = $datosCuenta[1];
-}
-else
-{
-  header( "Location: login.php" );
-  exit();
-}
-
 //User Data
   $usr_id = $_SESSION["usuario_id"];
   $usuarioMail = $_SESSION["usuario"];
